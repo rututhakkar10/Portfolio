@@ -262,14 +262,13 @@ body {
 }
 
 /* ---------- Footer ---------- */
+/* Mobile-first: footer sits in normal flow below the content (no overlap). */
 .footer-wrap {
-  position: absolute;
-  bottom: 1.75rem;
-  left: 0;
   width: 100%;
   display: flex;
   justify-content: center;
   padding: 0 1.5rem;
+  margin-top: 3rem;
 }
 
 .footer {
@@ -282,6 +281,14 @@ body {
 
 /* ---------- Desktop: scatter the doodles around the intro ---------- */
 @media (min-width: 1024px) {
+  /* Enough room on desktop to pin the footer to the bottom. */
+  .footer-wrap {
+    position: absolute;
+    bottom: 1.75rem;
+    left: 0;
+    margin-top: 0;
+  }
+
   .doodles {
     position: absolute;
     inset: 0;
