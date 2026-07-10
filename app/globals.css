@@ -1,0 +1,380 @@
+:root {
+  --paper: #f4f1ea;
+  --paper-soft: #efece3;
+  --ink: #1c1b18;
+  --ink-soft: #57544c;
+  --ink-faint: #97938a;
+  --line: #d7d3c7;
+  --accent: #5b63e6;
+  --radius: 999px;
+
+  --font-hand-stack: var(--font-hand), "Comic Sans MS", cursive;
+  --font-mono-stack: var(--font-mono), ui-monospace, "SFMono-Regular",
+    Menlo, monospace;
+  --font-serif-stack: var(--font-serif), Georgia, "Times New Roman", serif;
+  --font-sans-stack: var(--font-sans), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans-stack);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+.sketch-defs {
+  position: absolute;
+}
+
+/* ---------- Stage ---------- */
+.stage {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 1.5rem 5.5rem;
+  overflow: hidden;
+}
+
+/* ---------- Top bar ---------- */
+.topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  z-index: 3;
+}
+
+.brand {
+  font-family: var(--font-hand-stack);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.topbar__note {
+  font-family: var(--font-hand-stack);
+  font-size: 1.25rem;
+  color: var(--ink-soft);
+  transform: rotate(-3deg);
+}
+
+.topbar__note--right {
+  transform: rotate(3deg);
+}
+
+/* ---------- Doodles ---------- */
+.doodles {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.75rem 2.5rem;
+  margin: 0 0 2.75rem;
+  order: -1; /* on mobile, show doodles above the intro */
+}
+
+.doodle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 92px;
+  text-align: center;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.doodle__icon {
+  width: 58px;
+  height: 58px;
+  color: var(--ink);
+  filter: url(#sketch);
+}
+
+.doodle__label {
+  font-family: var(--font-mono-stack);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+}
+
+.doodle--link {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.doodle--link:hover {
+  transform: translateY(-3px) rotate(-2deg);
+}
+
+.doodle--link:hover .doodle__label {
+  color: var(--accent);
+}
+
+/* ---------- Intro ---------- */
+.intro {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 40rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Safety: no child may push past the viewport, so text always wraps. */
+.intro > * {
+  max-width: 100%;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono-stack);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  text-transform: lowercase;
+  color: var(--ink-soft);
+  background: var(--paper-soft);
+  border: 1px solid var(--line);
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius);
+}
+
+.badge__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-out infinite;
+}
+
+.eyebrow {
+  margin-top: 1.5rem;
+  max-width: 100%;
+  font-family: var(--font-serif-stack);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--ink-soft);
+}
+
+.headline {
+  margin-top: 0.75rem;
+  max-width: 100%;
+  font-family: var(--font-sans-stack);
+  font-size: clamp(1.9rem, 5.2vw, 3.05rem);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+.u {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--ink-faint);
+}
+
+.u--link {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+  transition: opacity 0.15s ease;
+}
+
+.u--link:hover {
+  opacity: 0.7;
+}
+
+.soon {
+  margin-top: 1.4rem;
+  max-width: min(30rem, 100%);
+  font-family: var(--font-mono-stack);
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--ink-faint);
+}
+
+.actions {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.pill {
+  font-family: var(--font-mono-stack);
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--ink);
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius);
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.pill:hover {
+  background: var(--ink);
+  color: var(--paper);
+  transform: translateY(-2px);
+}
+
+.pill--primary {
+  border-color: var(--accent);
+  color: var(--paper);
+  background: var(--accent);
+}
+
+.pill--primary:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--paper);
+  opacity: 0.9;
+}
+
+/* ---------- Footer ---------- */
+.footer-wrap {
+  position: absolute;
+  bottom: 1.75rem;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 1.5rem;
+}
+
+.footer {
+  font-family: var(--font-mono-stack);
+  font-size: 0.78rem;
+  line-height: 1.7;
+  text-align: center;
+  color: var(--ink-faint);
+}
+
+/* ---------- Desktop: scatter the doodles around the intro ---------- */
+@media (min-width: 1024px) {
+  .doodles {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    display: block;
+    pointer-events: none;
+  }
+
+  .doodle {
+    position: absolute;
+    width: 110px;
+    pointer-events: auto;
+  }
+
+  .doodle__icon {
+    width: 68px;
+    height: 68px;
+  }
+
+  .doodle--1 {
+    top: 24%;
+    left: 16%;
+  }
+  .doodle--2 {
+    top: 49%;
+    left: 10%;
+  }
+  .doodle--3 {
+    top: 74%;
+    left: 17%;
+  }
+  .doodle--4 {
+    top: 24%;
+    right: 16%;
+  }
+  .doodle--5 {
+    top: 49%;
+    right: 10%;
+  }
+  .doodle--6 {
+    top: 74%;
+    right: 17%;
+  }
+}
+
+/* ---------- Motion ---------- */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(91, 99, 230, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(91, 99, 230, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(91, 99, 230, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro,
+  .badge__dot {
+    animation: none;
+  }
+  .pill:hover,
+  .doodle--link:hover {
+    transform: none;
+  }
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 520px) {
+  .topbar__note {
+    display: none;
+  }
+  .stage {
+    padding: 5rem 1.25rem 6rem;
+  }
+  .doodle {
+    width: 76px;
+  }
+  .doodle__icon {
+    width: 48px;
+    height: 48px;
+  }
+}
