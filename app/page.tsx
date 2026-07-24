@@ -1,23 +1,22 @@
+import Link from "next/link";
 import Clock from "./Clock";
 import {
-  FrontendIcon,
-  BackendIcon,
-  DatabaseIcon,
-  CloudIcon,
-  CodeIcon,
-  MailIcon,
+  AboutIcon,
+  SkillsIcon,
+  ProjectsIcon,
+  AchievementsIcon,
 } from "./icons";
 
 // Update these with your real links.
 const LINKEDIN_URL = "https://www.linkedin.com/in/rutu--lathiya";
 const EMAIL = "rutu.thakkar.work@gmail.com";
 
+// The scattered doodles double as the site map — each links to a section.
 const doodles = [
-  { pos: 1, label: "Frontend", Icon: FrontendIcon },
-  { pos: 2, label: "Backend", Icon: BackendIcon },
-  { pos: 3, label: "Databases", Icon: DatabaseIcon },
-  { pos: 4, label: "Cloud", Icon: CloudIcon },
-  { pos: 5, label: "Craft", Icon: CodeIcon },
+  { pos: 1, label: "About", href: "/about", Icon: AboutIcon },
+  { pos: 2, label: "Skills", href: "/skills", Icon: SkillsIcon },
+  { pos: 3, label: "Projects", href: "/projects", Icon: ProjectsIcon },
+  { pos: 4, label: "Achievements", href: "/achievements", Icon: AchievementsIcon },
 ];
 
 export default function Home() {
@@ -53,29 +52,19 @@ export default function Home() {
         </header>
 
         <div className="doodles">
-          {doodles.map(({ pos, label, Icon }) => (
-            <div key={pos} className={`doodle doodle--${pos}`}>
+          {doodles.map(({ pos, label, href, Icon }) => (
+            <Link
+              key={pos}
+              href={href}
+              className={`doodle doodle--${pos} doodle--link`}
+            >
               <Icon className="doodle__icon" />
               <span className="doodle__label">{label}</span>
-            </div>
+            </Link>
           ))}
-
-          {/* The mailbox is a real link — say hello */}
-          <a
-            className="doodle doodle--6 doodle--link"
-            href={`mailto:${EMAIL}`}
-          >
-            <MailIcon className="doodle__icon" />
-            <span className="doodle__label">Say hello</span>
-          </a>
         </div>
 
         <section className="intro">
-          <span className="badge">
-            <span className="badge__dot" aria-hidden="true" />
-            <span>Portfolio in the works</span>
-          </span>
-
           <p className="eyebrow">Welcome &mdash; my little corner of the web</p>
 
           <h1 className="headline">
