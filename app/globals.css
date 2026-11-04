@@ -794,6 +794,13 @@ body {
   color: var(--ink-faint);
 }
 
+.achievement__link {
+  display: inline-block;
+  margin-top: 0.55rem;
+  font-family: var(--font-mono-stack);
+  font-size: 0.82rem;
+}
+
 /* ---- Page footer link ---- */
 .page-foot {
   margin-top: 3rem;

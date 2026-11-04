@@ -16,33 +16,24 @@ type Achievement = {
   title: string;
   detail: string;
   meta?: string;
+  link?: string;
   placeholder?: boolean;
 };
 
 const achievements: Achievement[] = [
   {
-    title: "Promoted to Software Engineer",
+    title: "AWS Certified Solutions Architect – Professional",
     detail:
-      "Advanced from Associate Software Engineer to Software Engineer at TechHolding, taking ownership of high-performance Next.js and TypeScript applications.",
-    meta: "TechHolding · 2023",
+      "Validated advanced expertise in designing distributed, secure, and cost-optimized architectures on AWS.",
+    meta: "Amazon Web Services · Certification",
+    link: "https://www.credly.com/badges/16fb81d9-b92d-4d72-9c5e-942e02ddfcdf/public_url",
   },
   {
-    title: "MCA — 8.14 CGPA",
+    title: "Claude Certified Architect – Professional",
     detail:
-      "Master of Computer Applications at GLS Institute of Computer Technology.",
-    meta: "GLS Institute · 2022–2023",
-  },
-  {
-    title: "BCA — 9.49 CGPA",
-    detail:
-      "Bachelor of Computer Applications at Sardar Patel University, graduating with distinction.",
-    meta: "Sardar Patel University",
-  },
-  {
-    title: "Add your own",
-    detail:
-      "Certifications, hackathon wins, published work, or talks belong here — edit app/achievements/page.tsx to add them.",
-    placeholder: true,
+      "Certified in architecting production AI solutions with Claude, from agent design to tool integration.",
+    meta: "Anthropic · Certification",
+    link: "https://www.credly.com/badges/57f581c3-0943-4a7c-bf2b-90432c772d32/public_url",
   },
 ];
 
@@ -78,6 +69,16 @@ export default function AchievementsPage() {
                     <p className="achievement__detail">{a.detail}</p>
                     {a.meta ? (
                       <p className="achievement__meta">{a.meta}</p>
+                    ) : null}
+                    {a.link ? (
+                      <a
+                        className="achievement__link u u--link"
+                        href={a.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Verify credential &rarr;
+                      </a>
                     ) : null}
                   </div>
                 </article>
